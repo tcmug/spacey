@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://effects/bullet_raycast.gd" type="Script" id=1]
+[ext_resource path="res://effects/bullet.cs" type="Script" id=1]
 [ext_resource path="res://textures/fire.material" type="Material" id=2]
 
 [sub_resource type="CapsuleMesh" id=1]

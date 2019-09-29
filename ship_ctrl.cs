@@ -13,11 +13,20 @@ public class ship_ctrl : RigidBody
 	private Vector3 torque = new Vector3();
 	private Vector3 rotEffect = new Vector3();
 	private AudioStreamPlayer impactSfx;
+	private AudioStreamPlayer fireSfx;
+	
+	private float rateDelay = 0;
+	private float fireRate = 4;
+	private PackedScene bullet;
+	private Node effects;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		impactSfx = (AudioStreamPlayer)GetNode("Impact");
+		fireSfx = (AudioStreamPlayer)GetNode("Fire");
+		bullet = ResourceLoader.Load("res://effects/bullet.tscn") as PackedScene;
+		effects = GetTree().GetRoot().GetNode("Spatial").GetNode("World").GetNode("Effects");
 	}
 	    
 	private void ApplyTorque(float delta) 
@@ -45,6 +54,17 @@ public class ship_ctrl : RigidBody
 		if ((GetCollidingBodies().Count > 0) && (!impactSfx.Playing))
 		{
 			impactSfx.Play();
+		}
+	
+		if (Input.IsActionPressed("fire")) 
+		{
+			rateDelay += delta;
+			if (rateDelay > 1.0f / fireRate) 
+			{
+				Vector3 direction = Transform.basis.z;
+				Shoot(Translation, direction);
+				rateDelay -= 1.0f / fireRate;
+			}
 		}
 
 		ApplyLinear(delta);
@@ -108,5 +128,17 @@ public class ship_ctrl : RigidBody
 		return ret;
 	}
 	
+	
+	private void Shoot(Vector3 origin, Vector3 normal) 
+	{
+		var obj = bullet.Instance() as bullet;
+	
+		if (!fireSfx.Playing)
+			fireSfx.Play();
+	
+		Vector3 mnormal = normal * -100;
+		obj.Init(origin + (normal * -6), mnormal, Rotation);
+		effects.AddChild(obj);
+	}
 
 }

@@ -62,7 +62,7 @@ material/0 = null
 [node name="Impact" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
-[node name="Shoot" type="AudioStreamPlayer" parent="."]
+[node name="Fire" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -18.041
 

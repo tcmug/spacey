@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="addons\bleh\BT_Condition.cs" />
     <Compile Include="addons\bleh\BT_Sequence.cs" />
+    <Compile Include="effects\bullet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ship_ctrl.cs" />
   </ItemGroup>

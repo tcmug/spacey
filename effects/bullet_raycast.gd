@@ -2,14 +2,18 @@ extends RayCast
 
 var ttl = 5
 var speed = 50
-var movement_normal: Vector3
+export var movement_normal: Vector3
 var hit = preload("res://effects/hit.tscn")
 var effects
 
 func _ready():
 	effects = get_tree().get_root().get_node("Spatial").get_node("World").get_node("Effects")
 	cast_to.z = -speed * 0.06
-	pass
+
+func Init(origin: Vector3, normal: Vector3, rot: Vector3):
+	movement_normal = normal
+	translation = origin
+	rotation = rot
 
 func _physics_process(delta):
 	if is_colliding():
