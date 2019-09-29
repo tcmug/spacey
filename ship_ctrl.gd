@@ -15,22 +15,22 @@ var fire_rate: float = 4.0
 
 var bullet = preload("res://effects/bullet.tscn")
 var bullets
-var effects 
+var effects
 
 func _ready():
 	bullets = get_tree().get_root().get_node("Spatial").get_node("World").get_node("Bullets")
 	effects = get_tree().get_root().get_node("Spatial").get_node("World").get_node("Effects")
 
 func _physics_process(delta):
-	
+
 	if get_colliding_bodies().size() > 0:
-		
+
 		if not $AudioStreamPlayer.playing:
 			print("impact")
 			$AudioStreamPlayer.play()
-		
+
 	var force: Vector3 = Vector3(0,0,0)
-	
+
 	if Input.is_action_pressed("move_forward"):
 		force.z += -1
 	if Input.is_action_pressed("move_backward"):
@@ -46,7 +46,7 @@ func _physics_process(delta):
 			var vforce: Vector3 = transform.basis.xform(Vector3(0, 0, -3))
 			shoot(translation, vforce)
 			rate_delay -= 1 / fire_rate
-		
+
 	var dir_force: Vector3 = transform.basis.xform(force)
 
 	apply_central_impulse(dir_force * acceleration * delta)
@@ -60,7 +60,7 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("rotate_left"):
 		torque.z += 1
-		
+
 	if Input.is_action_pressed("rotate_right"):
 		torque.z += -1
 
@@ -77,7 +77,7 @@ func _physics_process(delta):
 			rot_effect.z = 0
 		else:
 			rot_effect.z += a
-		
+
 		rot_effect.z = clamp(rot_effect.z, -0.3, 0.3)
 		$Model.rotation.z = rot_effect.z
 
@@ -102,10 +102,10 @@ func _input(event):
 func shoot(origin: Vector3, normal: Vector3):
 
 	var obj = bullet.instance()
-	
+
 	if not $Shoot.playing:
 		$Shoot.play()
-	
+
 	#obj.apply_central_impulse(normal * 100)
 	obj.movement_normal = normal
 	obj.translation = origin + normal * 3
@@ -113,4 +113,3 @@ func shoot(origin: Vector3, normal: Vector3):
 	bullets.add_child(obj)
 
 
-	

@@ -1,32 +1,89 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://ship.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Shape.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ship.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="ProceduralSky" id=1]
+radiance_size = 3
+sky_top_color = Color( 0.0823529, 0.0196078, 0.0588235, 1 )
+sky_horizon_color = Color( 0.137255, 0.0392157, 0.0941176, 1 )
+ground_bottom_color = Color( 0.0470588, 0.0666667, 0.0862745, 1 )
+ground_horizon_color = Color( 0.211765, 0.0156863, 0.207843, 1 )
+ground_curve = 0.0168179
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+glow_enabled = true
+glow_blend_mode = 0
+
+[sub_resource type="CubeMesh" id=3]
 size = Vector3( 50, 1, 50 )
 
-[sub_resource type="ConvexPolygonShape" id=2]
+[sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( -25, 0.5, 25, 25, 0.5, -25, 25, 0.5, 25, -25, 0.5, -25, -25, -0.5, 25, 25, -0.5, -25, 25, -0.5, 25, -25, -0.5, -25, 25, 0.5, 25, -25, 0.5, -25, 25, 0.5, -25, -25, 0.5, 25, 25, -0.5, 25, -25, -0.5, -25, 25, -0.5, -25, -25, -0.5, 25, 25, 0.5, 25, -25, -0.5, 25, -25, 0.5, 25, 25, -0.5, 25, 25, 0.5, -25, -25, -0.5, -25, -25, 0.5, -25, 25, -0.5, -25 )
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00692081, -0.0114179, -0.00531507 )
 script = ExtResource( 1 )
 
-[node name="ship" parent="." instance=ExtResource( 2 )]
+[node name="Scene Root" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.5314, 0, 34.9186 )
+
+[node name="World" type="WorldEnvironment" parent="."]
+editor/display_folded = true
+environment = SubResource( 2 )
+
+[node name="Bullets" type="Spatial" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00692081, -0.0114179, -0.00531507 )
+
+[node name="Effects" type="Spatial" parent="World"]
+
+[node name="ship" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.948059, 20.8271 )
 mass = 204.082
 
-[node name="Bullets" type="Spatial" parent="."]
-
 [node name="MeshInstance" type="MeshInstance" parent="."]
 editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 0.427074, -0.904217, 0, 0.904217, 0.427074, 0, 0, 0 )
-mesh = SubResource( 1 )
+transform = Transform( 1, 0, 0, 0, 0.427074, -0.904217, 0, 0.904217, 0.427074, 0, 0, -26.6807 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 0.427074, -0.904217, 0, 0.904217, 0.427074, 0.528988, 0, 1.63656 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.293566, 0.864376, 0.408257, 0, 0.427074, -0.904217, -0.955939, 0.265448, 0.125375, 20.1607, 0, -16.6018 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 0.293566, 0.864376, 0.408257, 0, 0.427074, -0.904217, -0.955939, 0.265448, 0.125375, -4.94107, 0, -16.6018 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
+shape = SubResource( 4 )

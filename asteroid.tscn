@@ -15,4 +15,3 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 shape = SubResource( 2 )
-
