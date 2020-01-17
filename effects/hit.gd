@@ -13,6 +13,5 @@ func _ready():
 func _process(delta):
 	ttl += delta
 	if ttl > lifetime:
-		print("freed")
 		free()
 

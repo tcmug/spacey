@@ -1,11 +1,8 @@
 using Godot;
 using System;
 
-public class BT_Condition : Node
-{
-	
-	public enum State { Success, Failure, Running }
-	
+public class BT_Condition : BT_Base
+{	
 	public override void _Ready()
 	{        
 		ticks = 0;
@@ -13,7 +10,7 @@ public class BT_Condition : Node
 	
 	int ticks;
 
-	public State tick(Node entity) 
+	public override State tick(Node entity) 
 	{
 		ticks++;
 		if (ticks == 2) {

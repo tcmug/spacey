@@ -16,7 +16,7 @@ public class ship_ctrl : RigidBody
 	private AudioStreamPlayer fireSfx;
 	
 	private float rateDelay = 0;
-	private float fireRate = 4;
+	private float fireRate = 10;
 	private PackedScene bullet;
 	private Node effects;
 	
@@ -61,8 +61,7 @@ public class ship_ctrl : RigidBody
 			rateDelay += delta;
 			if (rateDelay > 1.0f / fireRate) 
 			{
-				Vector3 direction = Transform.basis.z;
-				Shoot(Translation, direction);
+				Shoot();
 				rateDelay -= 1.0f / fireRate;
 			}
 		}
@@ -129,16 +128,18 @@ public class ship_ctrl : RigidBody
 	}
 	
 	
-	private void Shoot(Vector3 origin, Vector3 normal) 
+	private void Shoot() 
 	{
+	
+		//if (!fireSfx.Playing)
+		fireSfx.Play();
+
 		var obj = bullet.Instance() as bullet;
-	
-		if (!fireSfx.Playing)
-			fireSfx.Play();
-	
+		Vector3 normal = -Transform.basis.z;
 		Vector3 mnormal = normal * -100;
-		obj.Init(origin + (normal * -6), mnormal, Rotation);
+		obj.Init(this.Transform.origin + (normal * -6), mnormal, Rotation);
 		effects.AddChild(obj);
+		rateDelay -= 1.0f / fireRate;
 	}
 
 }

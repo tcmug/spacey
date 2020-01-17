@@ -1,10 +1,8 @@
 using Godot;
 using System;
 
-public class BT_Sequence : Node 
+public class BT_Sequence : BT_Base
 {
-	
-	public enum State { Success, Failure, Running }
 	
 	private int at;
 	
@@ -13,23 +11,20 @@ public class BT_Sequence : Node
 		at = 0;
 	}
 
-	public State tick(Node entity) 
+	public override State tick(Node entity) 
 	{
-		var children = GetChildren();
 		for (; at < GetChildCount(); at++) 
 		{
 			Node child = GetChild(at); 
-			/*
-			if (child is BT_Condition) {
-				switch (((BT_Condition)child).tick(entity)) { 
+			if (child is BT_Base) {
+				var childState = ((BT_Base)child).tick(entity);
+				switch (childState) { 
 				case State.Running:
-					return Running;
+					return State.Running;
 				case State.Failure:
-					state = childState;
 					return State.Failure;
 				}
 			}
-			*/
 		}
 		at = 0;
 		return State.Success;

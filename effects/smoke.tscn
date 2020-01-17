@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://effects/sparks-pass.tres" type="QuadMesh" id=1]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.153333, 0.653333, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 6 )
+width = 128
+
+[sub_resource type="Curve" id=3]
+max_value = 10.0
+_data = [ Vector2( 0, 0.236955 ), 0.0, 1.02929, 0, 0, Vector2( 0.121338, 4.93241 ), 1.08371, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+width = 128
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 4.0
+angular_velocity = 50.53
+angular_velocity_random = 1.0
+angle = 335.2
+angle_random = 1.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[node name="Particles" type="Particles"]
+amount = 100
+lifetime = 6.0
+visibility_aabb = AABB( -25, -25, -25, 50, 50, 50 )
+process_material = SubResource( 5 )
+draw_pass_1 = ExtResource( 1 )

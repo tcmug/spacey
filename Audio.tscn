@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://engine.wav" type="AudioStream" id=1]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D"]
+stream = ExtResource( 1 )
+attenuation_model = 1
+unit_db = 25.0
+max_db = 2.0
+autoplay = true
+out_of_range_mode = 1
+attenuation_filter_db = -52.7
+doppler_tracking = 2

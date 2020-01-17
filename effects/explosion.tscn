@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://effects/sparky.tres" type="QuadMesh" id=1]
+[ext_resource path="res://effects/explosion.cs" type="Script" id=2]
+[ext_resource path="res://effects/sparks.tres" type="Material" id=3]
+[ext_resource path="res://explosion.wav" type="AudioStream" id=4]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+angular_velocity = 7.28675e-43
+angle = 360.0
+angle_random = 1.0
+scale = 10.0
+color_ramp = SubResource( 2 )
+
+[node name="Particles" type="Particles"]
+emitting = false
+amount = 15
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.7
+process_material = SubResource( 3 )
+draw_pass_1 = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Particles2" type="Particles" parent="."]
+emitting = false
+amount = 50
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource( 3 )
+draw_pass_1 = ExtResource( 1 )
+
+[node name="Explosion" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_db = 20.0
+doppler_tracking = 2

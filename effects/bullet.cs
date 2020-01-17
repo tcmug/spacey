@@ -3,51 +3,65 @@ using System;
 
 public class bullet : RayCast
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
 	private PackedScene hitEffect;
 	private Node effects;
+	private float TTL;
 	private Vector3 movementNormal;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+		TTL = 1.0f;
 		hitEffect = ResourceLoader.Load("res://effects/hit.tscn") as PackedScene;
-		CastTo = new Vector3(0.0f, 0.0f, -50.0f * 0.06f);
 		effects = GetTree().GetRoot().GetNode("Spatial").GetNode("World").GetNode("Effects");
-//		GetTree().GetRoot().GetNode("Spatial").GetNode("World").get_node("Effects")
     }
 	
 	public void Init(Vector3 origin, Vector3 normal, Vector3 rot) 
 	{
 		Translation = origin;
 		movementNormal = normal;
+		CastTo = new Vector3(0.0f, 0.0f, (movementNormal.Length() / 60));
 		Rotation = rot;
 	}
 
-	
 	public override void _PhysicsProcess(float delta) 
 	{
-		if (IsColliding()) {
+		TTL -= delta;
+		if (TTL < 0) {
+			Free();
+		} 
+		else if (IsColliding()) {
+			Vector3 cpoint = GetCollisionPoint();
 			Particles obj = (Particles)hitEffect.Instance();
 			var dir = movementNormal.Normalized().Reflect(GetCollisionNormal());
-			obj.LookAt(dir, new Vector3(0.0f,1.0f,0.0f));
-			obj.Translation = GetCollisionPoint();
+			obj.LookAt(dir, new Vector3(0.0f, 1.0f, 0.0f));
+			obj.Translation = cpoint;
+			var collider = GetCollider();
+			if (collider is Bot) {
+				var node = (Bot)collider;
+				node.Damage(10);
+			}
 			effects.AddChild(obj);
+			
+			if (GD.Randi() % 100 > 20) {
+				float len = movementNormal.Length();
+				this.movementNormal = -dir;
+				this.Translation = cpoint;
+				movementNormal += new Vector3(
+					(float)GD.RandRange(-0.2f, 0.2f),
+					(float)GD.RandRange(-0.2f, 0.2f),
+					(float)GD.RandRange(-0.2f, 0.2f)
+				);
+				movementNormal = movementNormal.Normalized() * len;
+				Translation += movementNormal * delta;
+				this.LookAt(movementNormal, new Vector3(0, 1, 0));
+			} else {
+				Free();
+			}
 			obj.Emitting = true;
-			Free();
-		}
-		else 
-		{
+		} else {
 			Translation += movementNormal * delta;
 		}
+
 	}
 
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }
