@@ -33,6 +33,7 @@ public class bullet : RayCast
 			Vector3 cpoint = GetCollisionPoint();
 			Particles obj = (Particles)hitEffect.Instance();
 			var dir = movementNormal.Normalized().Reflect(GetCollisionNormal());
+			effects.AddChild(obj);
 			obj.LookAt(dir, new Vector3(0.0f, 1.0f, 0.0f));
 			obj.Translation = cpoint;
 			var collider = GetCollider();
@@ -40,8 +41,7 @@ public class bullet : RayCast
 				var node = (Bot)collider;
 				node.Damage(10);
 			}
-			effects.AddChild(obj);
-			
+
 			if (GD.Randi() % 100 > 20) {
 				float len = movementNormal.Length();
 				this.movementNormal = -dir;

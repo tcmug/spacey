@@ -18,6 +18,7 @@ public class Bot : RigidBody
 	
 	private float rateDelay = 0;
 	private float fireRate = 5;
+	private float altReload = 0;
 	private PackedScene bullet;
 	private PackedScene missile;
 	private PackedScene explosion;
@@ -55,7 +56,16 @@ public class Bot : RigidBody
 	}
 		
 	public override void _Process(float delta)
-	{
+	{	
+		if (health <= 0) {
+			Free();
+			return;
+		}
+		
+		if (altReload > 0) {
+			altReload -= delta;
+		}
+	
 		if (shoot) {
 			rateDelay += delta;
 			if (rateDelay > 1.0f / fireRate) 
@@ -69,14 +79,15 @@ public class Bot : RigidBody
 			}
 		}
 		
-		if (shootAlt) {
+		if (shootAlt && altReload <= 0) {
 			if (IsInstanceValid(lockedOn)) {
 				var obj = missile.Instance() as Missile;
 				var x = GetGlobalTransform().basis.z;
 				var y = GetGlobalTransform().basis.y;
-				obj.Init(this.Transform.origin + (y * -4),  x * 10, Rotation, lockedOn);
+				obj.Init(this.Transform.origin + (y * -4),  x * 10, Rotation, lockedOn, LinearVelocity);
 				effects.AddChild(obj);
 				((AudioStreamPlayer3D)GetNode("Shiit")).Play();
+				altReload = 10;
 			} else {
 				lockedOn = null;
 			}
@@ -135,11 +146,10 @@ public class Bot : RigidBody
 		if (this.health <= 0) 
 		{
 			var obj = explosion.Instance() as explosion;
-			obj.Init(this.Transform.origin);
 			effects.AddChild(obj);
+			obj.Init(this.Transform.origin);
 			this.health = 0;
 			this.EmitSignal(nameof(BotDies), this);
-			this.Free();
 		}
 	}
 	

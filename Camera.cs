@@ -5,7 +5,7 @@ public class Camera : Godot.Spatial
 {
 
 	public override void _Ready() {
-		Spatial following = (Spatial) GetParent().GetNode("Player");
+		Spatial following = (Spatial)GetParent().GetNode("Player");
 		if (following != null) {
 			this.Translate((following.Translation - this.Translation) + (following.GlobalTransform.basis.z * 10));
 		}

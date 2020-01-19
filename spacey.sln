@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spacey", "spacey.csproj", "{79EAD6BF-F774-400B-82FF-68BD40E0F3EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spacey", "spacey.csproj", "{13E6E6A0-632D-446E-BADE-46B7F75C05C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	Tools|Any CPU = Tools|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{79EAD6BF-F774-400B-82FF-68BD40E0F3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79EAD6BF-F774-400B-82FF-68BD40E0F3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79EAD6BF-F774-400B-82FF-68BD40E0F3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79EAD6BF-F774-400B-82FF-68BD40E0F3EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79EAD6BF-F774-400B-82FF-68BD40E0F3EF}.Tools|Any CPU.ActiveCfg = Tools|Any CPU
-		{79EAD6BF-F774-400B-82FF-68BD40E0F3EF}.Tools|Any CPU.Build.0 = Tools|Any CPU
+		{13E6E6A0-632D-446E-BADE-46B7F75C05C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E6E6A0-632D-446E-BADE-46B7F75C05C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E6E6A0-632D-446E-BADE-46B7F75C05C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E6E6A0-632D-446E-BADE-46B7F75C05C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E6E6A0-632D-446E-BADE-46B7F75C05C0}.Tools|Any CPU.ActiveCfg = Tools|Any CPU
+		{13E6E6A0-632D-446E-BADE-46B7F75C05C0}.Tools|Any CPU.Build.0 = Tools|Any CPU
 	EndGlobalSection
 EndGlobal
