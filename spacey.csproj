@@ -49,13 +49,15 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="effects\bullet.cs" />
     <Compile Include="effects\explosion.cs" />
+    <Compile Include="entities\Bolter\Bolter.cs" />
     <Compile Include="entities\bot\AI_Controller.cs" />
+    <Compile Include="entities\bot\Bot.cs" />
     <Compile Include="entities\bot\SixthSense.cs" />
     <Compile Include="entities\bot\UILock.cs" />
+    <Compile Include="entities\MissileLauncher\MissileLauncher.cs" />
     <Compile Include="entities\Missile\Missile.cs" />
     <Compile Include="entities\player\PlayerController.cs" />
     <Compile Include="entities\Turret\Turret.cs" />

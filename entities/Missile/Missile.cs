@@ -6,7 +6,7 @@ public class Missile : RigidBody
 	
 	private PackedScene explosion;
 	private float TTL = 15.0f;
-	
+	private int damageCaused = 0;
 	private Vector3 torque = new Vector3();
 	private Vector3 rotEffect = new Vector3();
 	private Vector3 force = new Vector3();
@@ -86,7 +86,7 @@ public class Missile : RigidBody
 		if (IsInstanceValid(target) && body is Bot && body == target) {
 			var obj = explosion.Instance() as explosion;
 			var node = (Bot)target;
-			node.Damage(500);
+			node.Damage(damageCaused);
 			effects.AddChild(obj);
 			obj.Init(this.GetGlobalTransform().origin);
 			TTL = 0;

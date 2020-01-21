@@ -127,7 +127,6 @@ transform = Transform( -0.986467, 7.42795e-13, 0.163961, -2.85354e-11, 1, 2.7284
 transform = Transform( 1, -4.54747e-13, 0, -3.29692e-12, 1, -9.09495e-13, 0, 9.09495e-13, 1, 0, 0, 0 )
 
 [node name="Bot10" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
 transform = Transform( -0.986467, 0.000118944, 0.163959, 0.163691, -0.0565005, 0.984893, 0.00938094, 0.998403, 0.0557165, -73.3713, -8.03567, -25.8839 )
 
 [node name="Controller" parent="Bot10" instance=ExtResource( 6 )]
@@ -140,10 +139,6 @@ transform = Transform( 0.892546, 0.449298, 0.0386417, -0.449138, 0.893365, -0.01
 transform = Transform( 1, 0, 0, 0, 0.356474, 0.934305, 0, -0.934305, 0.356474, 0, 6.40039, 28.0821 )
 
 [node name="Spatial" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 7.42961e-13, 0, 9.3231e-13, 1, 1.90994e-11, 0, 0, 1, 89.4219, 5.66947, 21.5531 )
+transform = Transform( 1, 7.42961e-13, 0, 9.3231e-13, 1, 2.27374e-11, 0, 0, 1, -0.00267204, -0.000422512, -48.258 )
 
-[node name="Spatial2" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 6.9214e-05, 2.59721e-05, -2.004e-05, 0.591962, -0.805966, -7.11585e-05, 0.805966, 0.591962, 96.6109, 5.6699, 21.5527 )
-
-[node name="Spatial3" parent="." instance=ExtResource( 8 )]
-transform = Transform( 0.0934708, -0.99098, -0.0960326, 0.055188, 0.101464, -0.993307, 0.994091, 0.0875454, 0.064174, 107.975, 5.67065, 29.894 )
+[node name="_Effects" type="Node" parent="."]

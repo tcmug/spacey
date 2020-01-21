@@ -70,13 +70,22 @@ public class AI_Controller : Spatial
 			}
 		}
 		
+		var targetOrigin = new Vector3();
+		
+		if (target is Bot) {
+			targetOrigin = target.GetGlobalTransform().origin;
+			var distanceToTarget = (targetOrigin - GetGlobalTransform().origin).Length();
+			var relativeVelocity = (target as RigidBody).LinearVelocity - bot.LinearVelocity;
+			targetOrigin += relativeVelocity * (distanceToTarget  / 300.0f);
+		}
+		
 		switch (AIState) {
 			case State.Attacking: {
 				float speed = 0.25f;
-				if (TurnTowards(target.Translation)) {
+				if (TurnTowards(targetOrigin)) {
 					speed = 0.5f;
 				}
-				if (DistanceTo(target.Translation) > 10) {
+				if (DistanceTo(targetOrigin) > 10) {
 					bot.boost(new Vector3(0, 0, speed));
 				} else {
 					AIState = State.Evading;
@@ -88,12 +97,12 @@ public class AI_Controller : Spatial
 			}
 			break;
 			case State.Evading: {
-				Vector3 evasionTarget = bot.Translation - (target.Translation - bot.Translation);
+				Vector3 evasionTarget = bot.Translation - (targetOrigin - bot.Translation);
 				float speed = 2.0f;
 				if (TurnTowards(evasionTarget)) {
 					speed = 1.0f;
 				}
-				if (DistanceTo(target.Translation) > 15) {
+				if (DistanceTo(targetOrigin) > 15) {
 					AIState = State.Attacking;
 				} else {
 					bot.boost(new Vector3(0, 0, speed));

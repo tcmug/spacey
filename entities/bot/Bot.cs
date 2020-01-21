@@ -15,25 +15,18 @@ public class Bot : RigidBody
 	private Vector3 torque = new Vector3();
 	private Vector3 rotEffect = new Vector3();
 	private Vector3 force = new Vector3();
-	
-	private float rateDelay = 0;
-	private float fireRate = 5;
-	private float altReload = 0;
-	private PackedScene bullet;
-	private PackedScene missile;
+
 	private PackedScene explosion;
 	private Node effects;
 	private int health = 100;
 	
-	private Spatial lockedOn = null;
-	private bool shootAlt = false;
-	private bool shoot = false;
+	private Spatial lockedOn = null;	
+	Node armament;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		bullet = ResourceLoader.Load("res://effects/bullet.tscn") as PackedScene;
-		missile = ResourceLoader.Load("res://entities/Missile/Missile.tscn") as PackedScene;
+		armament = GetNode("_Armament");
 		explosion = ResourceLoader.Load("res://effects/explosion.tscn") as PackedScene;
 		effects = GetTree().GetRoot().GetNode("Spatial").GetNode("World").GetNode("Effects");
 	}
@@ -61,40 +54,6 @@ public class Bot : RigidBody
 			Free();
 			return;
 		}
-		
-		if (altReload > 0) {
-			altReload -= delta;
-		}
-	
-		if (shoot) {
-			rateDelay += delta;
-			if (rateDelay > 1.0f / fireRate) 
-			{
-				var obj = bullet.Instance() as bullet;
-				var x = GetGlobalTransform().basis.z;
-				obj.Init(this.Transform.origin + (x * 4),  x * 300, Rotation);
-				effects.AddChild(obj);
-				((AudioStreamPlayer3D)GetNode("Shiit")).Play();
-				rateDelay -= 1.0f / fireRate;
-			}
-		}
-		
-		if (shootAlt && altReload <= 0) {
-			if (IsInstanceValid(lockedOn)) {
-				var obj = missile.Instance() as Missile;
-				var x = GetGlobalTransform().basis.z;
-				var y = GetGlobalTransform().basis.y;
-				obj.Init(this.Transform.origin + (y * -4),  x * 10, Rotation, lockedOn, LinearVelocity);
-				effects.AddChild(obj);
-				((AudioStreamPlayer3D)GetNode("Shiit")).Play();
-				altReload = 10;
-			} else {
-				lockedOn = null;
-			}
-		}
-		
-		shootAlt = false;
-		shoot = false;
 	}
 
 	public override void _PhysicsProcess(float delta) 
@@ -127,13 +86,11 @@ public class Bot : RigidBody
 	
 	public void Shoot() 
 	{
-		shoot = true;
 	}
 	
 	public void ShootAlt() 
 	{
-		shootAlt = true;
-	}	
+	}
 	
 	public void LockOn(Spatial target) {
 		lockedOn = target;
