@@ -1,36 +1,30 @@
 using Godot;
 using System;
 
-public class Bolter : Spatial
+public class Bolter : Attachment
 {
-	private RigidBody owner;
 	
 	private PackedScene bullet;
 	private Node effects;
 	private float counter = 0;
-	private float delay = 2.0f;
+	private float delay = 0.3f;
 
 	public override void _Ready()
 	{
-		Node parent = this;
-		do {
-			parent = parent.GetParent();
-		} while (!(parent is RigidBody));
-		owner = (RigidBody)parent;
+		base._Ready();
 		effects = GetNode<Node>("/root/Spatial/_Effects");
 		bullet = ResourceLoader.Load("res://effects/bullet.tscn") as PackedScene;
-	
 	}
 	
-	public override void _Process(float delta)
+	public override void _ProcessAttachment(float delta)
 	{
 		if (counter > 0) {
 			counter -= delta;
 		}
-		if (counter <= 0) {
+		if (engaged && counter <= 0) {
 			Fire();
 			counter += delay;
-		}
+		} 
 	}
 	
 	private void Fire() {

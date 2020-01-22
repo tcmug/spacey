@@ -20,7 +20,9 @@ public class Bot : RigidBody
 	private Node effects;
 	private int health = 100;
 	
-	private Spatial lockedOn = null;	
+	private Spatial lockedOn = null;
+	
+	bool engaged = false;
 	Node armament;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -54,6 +56,16 @@ public class Bot : RigidBody
 			Free();
 			return;
 		}
+		
+		// Engage attachments.
+		if (engaged) {
+			for (var at = 0; at < armament.GetChildCount(); at++)
+			{
+				Attachment wpn = armament.GetChild<Attachment>(at);
+				wpn.Engage();
+			}
+			engaged = false;
+		}
 	}
 
 	public override void _PhysicsProcess(float delta) 
@@ -86,6 +98,7 @@ public class Bot : RigidBody
 	
 	public void Shoot() 
 	{
+		engaged = true;
 	}
 	
 	public void ShootAlt() 
