@@ -76,6 +76,10 @@ fire_alt={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_16="Targetting"
+
 [physics]
 
 3d/default_gravity=0.0

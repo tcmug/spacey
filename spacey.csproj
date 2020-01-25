@@ -60,6 +60,8 @@
     <Compile Include="entities\bot\UILock.cs" />
     <Compile Include="entities\MissileLauncher\MissileLauncher.cs" />
     <Compile Include="entities\Missile\Missile.cs" />
+    <Compile Include="entities\PhysicalEntity.cs" />
+    <Compile Include="entities\player\AimingThing.cs" />
     <Compile Include="entities\player\PlayerController.cs" />
     <Compile Include="entities\Turret\Turret.cs" />
     <Compile Include="HUD.cs" />

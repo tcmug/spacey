@@ -48,15 +48,18 @@ mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="AimingRay" type="RayCast" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, -500 )
-collision_mask = 32
+collision_mask = 32768
 collide_with_areas = true
 
 [node name="AimingThing" type="Area" parent="."]
-collision_layer = 32768
-collision_mask = 32
+monitorable = false
+collision_layer = 0
+collision_mask = 32768
 
 [node name="AimingRay2" type="CollisionShape" parent="AimingThing"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 shape = SubResource( 5 )
+[connection signal="area_entered" from="AimingThing" to="." method="_on_AimingThing_area_entered"]
+[connection signal="area_exited" from="AimingThing" to="." method="_on_AimingThing_area_exited"]

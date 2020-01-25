@@ -12,8 +12,8 @@ public class PlayerController : Spatial
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		aimingRay = (RayCast)GetNode("AimingRay");
-		aimingSight = (Spatial)GetNode("AimingSight");
+		aimingRay = GetNode<RayCast>("AimingRay");
+		aimingSight = GetNode<Spatial>("AimingSight");
 	}
 
 	public override void _Input(InputEvent ev)
@@ -44,7 +44,7 @@ public class PlayerController : Spatial
 		if (parent != null) {
 
 			Bot entity = (Bot)parent;
-			entity.LockOn(entity);
+
 			Vector3 force = new Vector3(0,0,0);
 
 			if (Input.IsActionPressed("fire"))
@@ -90,4 +90,25 @@ public class PlayerController : Spatial
 		}
 	}
 
+	
+	private void _on_AimingThing_area_entered(object area)
+	{
+		Area a = area as Area;
+		if (a != null) {
+			a.GetNode<Spatial>("Rectangle").Visible = true;
+			(GetParent() as Bot).LockOn((a.GetParent() as AI_Controller).GetEntity());
+			GD.Print(a.GetName());
+		}
+	}
+	
+	
+	private void _on_AimingThing_area_exited(object area)
+	{
+		Area a = area as Area;
+		if (a != null) {
+			a.GetNode<Spatial>("Rectangle").Visible = false;
+		}
+	}
+
 }
+

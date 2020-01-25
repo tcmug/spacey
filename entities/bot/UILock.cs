@@ -4,15 +4,16 @@ using System;
 public class UILock : Area
 {
 
-	private void _on_Area3_area_entered(Area area)
+	private void _on_TargettingRectangle_area_entered(object area)
 	{
-	    (GetNode("Rectangle") as Spatial).Visible = true;
+
 	}
-	
-	private void _on_Area3_area_exited(Area area)
+
+	private void _on_TargettingRectangle_area_exited(object area)
 	{
-	    (GetNode("Rectangle") as Spatial).Visible = false;
+
 	}
 
 }
+
 

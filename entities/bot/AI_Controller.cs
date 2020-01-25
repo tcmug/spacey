@@ -112,10 +112,13 @@ public class AI_Controller : Spatial
 			case State.Avoiding:
 			break;
 		}
-	
 
 	}
-	
+
+	public PhysicalEntity GetEntity() 
+	{
+		return bot;
+	}
 
 	private void _on_Area_body_entered(object body)
 	{
@@ -140,20 +143,6 @@ public class AI_Controller : Spatial
 		}*/
 	}
 	
-	private void _on_Area2_HeardSomething()
-	{
-		this.detect.Play();
-	}
-
-	private void _on_Chatter_finished()
-	{
-		// conversation object ?
-	    // get next in conversation
-		// conversation target -> next line
-		
-	}
-	
-
 	
 }
 

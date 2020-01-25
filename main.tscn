@@ -5,9 +5,9 @@
 [ext_resource path="res://HUD.cs" type="Script" id=3]
 [ext_resource path="res://entities/bot/Bot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/player/PlayerController.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/bot/AI_Controller.tscn" type="PackedScene" id=6]
-[ext_resource path="res://effects/mod.tscn" type="PackedScene" id=7]
-[ext_resource path="res://entities/Turret/Turret.tscn" type="PackedScene" id=8]
+[ext_resource path="res://effects/mod.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/Turret/Turret.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/bot/AI_Controller.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ProceduralSky" id=1]
 radiance_size = 3
@@ -75,69 +75,40 @@ far = 5000.0
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.999983, 0.00585702, -5.03278e-08, -0.00585702, 0.999983, 3.24462e-07, 5.22159e-08, -3.24153e-07, 1, 106.622, 0.00412017, 80.9238 )
+editor/display_folded = true
+transform = Transform( -0.622474, -0.00375027, -0.782631, -0.00594794, 0.999982, -6.10348e-05, 0.782618, 0.00461706, -0.622485, 106.622, 0.00412017, 80.9238 )
 
 [node name="Controller" parent="Player" instance=ExtResource( 5 )]
 
-[node name="Bot4" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( -0.177936, -4.81959e-05, 0.984042, 4.15427e-05, 1, 5.64922e-05, -0.984042, 5.09344e-05, -0.177936, 11.0357, 11.0927, 19.8407 )
-
-[node name="Controller" parent="Bot4" instance=ExtResource( 6 )]
-
-[node name="Bot7" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( 0.557854, -0.389426, -0.732903, -0.784395, 0.0411239, -0.618898, 0.271155, 0.920139, -0.282522, -44.53, 26.3096, 19.8436 )
-
-[node name="Controller" parent="Bot7" instance=ExtResource( 6 )]
-transform = Transform( 1, 2.98023e-08, 2.98023e-08, 0, 1, 0, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0 )
-
-[node name="Bot8" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( -0.718584, 0.000100349, 0.695441, 0.695427, -0.00610986, 0.718571, 0.00432115, 0.999981, 0.00432067, -44.5316, 11.089, -25.886 )
-
-[node name="Controller" parent="Bot8" instance=ExtResource( 6 )]
-
-[node name="Bot11" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( 0.00828945, -6.20122e-05, -0.999966, 7.0128e-05, 1, -6.14292e-05, 0.999966, -6.9613e-05, 0.00828936, -81.3885, 11.0869, -5.49318 )
-
-[node name="Controller" parent="Bot11" instance=ExtResource( 6 )]
-
-[node name="Bot5" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( -0.986467, 7.42795e-13, 0.163961, -1.39835e-11, 1, 2.72848e-12, -0.163961, -2.72848e-12, -0.986467, 19.054, -8.0297, 19.8407 )
-
-[node name="Controller" parent="Bot5" instance=ExtResource( 6 )]
-transform = Transform( 1, -4.54747e-13, 0, -3.29692e-12, 1, -9.09495e-13, 0, 9.09495e-13, 1, 0, 0, 0 )
-
-[node name="Bot6" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( 0.65728, -9.93292e-05, 0.753647, 9.3887e-05, 1, 4.99189e-05, -0.753647, 3.79524e-05, 0.65728, -36.5108, -8.03305, 19.8438 )
-
-[node name="Controller" parent="Bot6" instance=ExtResource( 6 )]
-transform = Transform( 1, -4.54747e-13, 0, -3.29692e-12, 1, -9.09495e-13, 0, 9.09495e-13, 1, 0, 0, 0 )
-
-[node name="Bot9" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( -0.986467, 7.42795e-13, 0.163961, -2.85354e-11, 1, 2.72848e-12, -0.163961, -2.72848e-12, -0.986467, -36.5133, -8.03345, -25.886 )
-
-[node name="Controller" parent="Bot9" instance=ExtResource( 6 )]
-transform = Transform( 1, -4.54747e-13, 0, -3.29692e-12, 1, -9.09495e-13, 0, 9.09495e-13, 1, 0, 0, 0 )
-
-[node name="Bot10" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.986467, 0.000118944, 0.163959, 0.163691, -0.0565005, 0.984893, 0.00938094, 0.998403, 0.0557165, -73.3713, -8.03567, -25.8839 )
-
-[node name="Controller" parent="Bot10" instance=ExtResource( 6 )]
-transform = Transform( 1, -4.54747e-13, 0, -3.29692e-12, 1, -9.09495e-13, 0, 9.09495e-13, 1, 0, 0, 0 )
-
-[node name="mod" parent="." instance=ExtResource( 7 )]
+[node name="mod" parent="." instance=ExtResource( 6 )]
 transform = Transform( 0.892546, 0.449298, 0.0386417, -0.449138, 0.893365, -0.0132286, -0.0404647, -0.00554836, 0.999166, 79.9043, 0.404026, -24.0738 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.356474, 0.934305, 0, -0.934305, 0.356474, 0, 6.40039, 28.0821 )
 
-[node name="Spatial" parent="." instance=ExtResource( 8 )]
+[node name="Spatial" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.923948, 0.38196, 0.0206348, -0.382517, 0.922602, 0.0498701, 1.0729e-05, -0.0539706, 0.998543, 89.8855, 2.34789, -24.2565 )
 
 [node name="_Effects" type="Node" parent="."]
+
+[node name="_Entities" type="Node" parent="."]
+
+[node name="Bot" parent="_Entities" instance=ExtResource( 4 )]
+transform = Transform( 1, 6.02574e-05, -5.53705e-05, -6.02574e-05, 1, -8.75193e-06, 5.53705e-05, 8.75193e-06, 1, 0, 0, 0 )
+
+[node name="Spatial" parent="_Entities/Bot" instance=ExtResource( 8 )]
+
+[node name="Bot2" parent="_Entities" instance=ExtResource( 4 )]
+transform = Transform( -0.857305, -0.514808, 5.19763e-05, 0.0718279, -0.119514, 0.990231, -0.509773, 0.848934, 0.139438, 0, 0, 0 )
+
+[node name="Spatial" parent="_Entities/Bot2" instance=ExtResource( 8 )]
+
+[node name="Bot3" parent="_Entities" instance=ExtResource( 4 )]
+transform = Transform( 0.660578, 3.3237e-05, -0.750758, -6.02574e-05, 1, -8.75193e-06, 0.750758, 5.10182e-05, 0.660578, 0, 0, 19.8642 )
+
+[node name="Spatial" parent="_Entities/Bot3" instance=ExtResource( 8 )]
+
+[node name="Bot4" parent="_Entities" instance=ExtResource( 4 )]
+transform = Transform( 1, 6.02574e-05, -5.53705e-05, -6.02574e-05, 1, -8.75193e-06, 5.53705e-05, 8.75193e-06, 1, 21.4286, 0, 0 )
+
+[node name="Spatial" parent="_Entities/Bot4" instance=ExtResource( 8 )]

@@ -8,6 +8,7 @@ public class MissileLauncher : Attachment
 	private Node effects;
 	private float counter = 0;
 	private float delay = 5.0f;
+	private RigidBody target;
 
 	public override void _Ready()
 	{
@@ -27,15 +28,25 @@ public class MissileLauncher : Attachment
 		}
 	}
 	
+	public override void Target(RigidBody trgt)
+	{
+		GD.Print("target ", trgt.GetName());
+		target = trgt;
+	}
+	
 	private void Fire() {
-		var tf = GetGlobalTransform();
-		var x = tf.basis.z;
-		var y = tf.basis.y;
 		
-		var obj = missile.Instance() as Missile;
-		obj.Init(tf.origin, x * 10, tf.basis.GetEuler(), owner, owner.LinearVelocity - y * 2);
-		effects.AddChild(obj);
-		//((AudioStreamPlayer3D)GetNode("Shiit")).Play();
+		if (IsInstanceValid(target))
+		{
+			var tf = GetGlobalTransform();
+			var x = tf.basis.z;
+			var y = tf.basis.y;
+			
+			var obj = missile.Instance() as Missile;
+			obj.Init(tf.origin, x * 10, tf.basis.GetEuler(), target, owner.LinearVelocity - y * 2);
+			effects.AddChild(obj);
+			//((AudioStreamPlayer3D)GetNode("Shiit")).Play();
+		}
 	}
 	
 }

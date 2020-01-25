@@ -15,6 +15,11 @@ public class Attachment : Spatial
 		owner = (RigidBody)parent;
 	}
 	
+	public virtual void Target(RigidBody target)
+	{
+		
+	}
+	
 	public void Engage() 
 	{
 		engaged = true;

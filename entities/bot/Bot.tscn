@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/bot/Bot.cs" type="Script" id=1]
-[ext_resource path="res://tempstiff/rectangle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://entities/Bolter/Bolter.tscn" type="PackedScene" id=3]
-[ext_resource path="res://entities/MissileLauncher/MissileLauncher.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/Bolter/Bolter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/MissileLauncher/MissileLauncher.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 0, 1, 1.5, 0, 1, -1.5, 0, 1, 1.5, 0, 1, -1.5, -1, -1, 1.5, 1, -1, -1.5, 1, -1, 1.5, -1, -1, -1.5, 0, 1, 1.5, 0, 1, -1.5, 0, 1, -1.5, 0, 1, 1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5, -1, -1, 1.5, -1, -1, 1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5 )
@@ -23,18 +22,18 @@ size = Vector3( 2, 2, 3 )
 radius = 4.0
 
 [node name="Bot" type="RigidBody"]
-collision_layer = 33
 mass = 200.0
 script = ExtResource( 1 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="."]
+[node name="x" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+editor/display_folded = true
 mesh = SubResource( 3 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="."]
+[node name="MeshInstance2" type="MeshInstance" parent="MeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -1.34449 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
@@ -47,11 +46,9 @@ collision_mask = 1024
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 6 )
 
-[node name="Selector" parent="." instance=ExtResource( 2 )]
-
 [node name="_Armament" type="Spatial" parent="."]
 
-[node name="Bolter" parent="_Armament" instance=ExtResource( 3 )]
+[node name="Bolter" parent="_Armament" instance=ExtResource( 2 )]
 
-[node name="MissileLauncher" parent="_Armament" instance=ExtResource( 4 )]
+[node name="MissileLauncher" parent="_Armament" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.43579, 0 )
