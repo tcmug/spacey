@@ -17,16 +17,28 @@ public class PhysicalEntity: RigidBody
 	private Node effects;
 	
 	[Export] private int health = 100;
+	[Export] private int crew = 5;
 	
 	private RigidBody lockedOn = null;
 	Node armament;
+	Node crewMembers;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		armament = GetNode("_Armament");
+		armament = GetNode<Node>("_Armament");
+		crewMembers = GetNode<Node>("_CrewMembers");
 		explosion = ResourceLoader.Load("res://effects/explosion.tscn") as PackedScene;
 		effects = GetTree().GetRoot().GetNode("Spatial").GetNode("World").GetNode("Effects");
+		
+		if (crewMembers != null) {
+			var member = ResourceLoader.Load("res://entities/CrewMember/CrewMember.tscn") as PackedScene;
+			for (int i = 0; i < crew; i++)
+			{
+				var m = member.Instance() as CrewMember;
+				crewMembers.AddChild(m);
+			}
+		}
 	}
 	    
 	private void ApplyTorque(float delta) 

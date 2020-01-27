@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://Camera.cs" type="Script" id=2]
-[ext_resource path="res://HUD.cs" type="Script" id=3]
-[ext_resource path="res://entities/bot/Bot.tscn" type="PackedScene" id=4]
-[ext_resource path="res://entities/player/PlayerController.tscn" type="PackedScene" id=5]
-[ext_resource path="res://effects/mod.tscn" type="PackedScene" id=6]
-[ext_resource path="res://entities/Turret/Turret.tscn" type="PackedScene" id=7]
-[ext_resource path="res://entities/bot/AI_Controller.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/test.gd" type="Script" id=3]
+[ext_resource path="res://themes/main.tres" type="Theme" id=4]
+[ext_resource path="res://HUD.cs" type="Script" id=5]
+[ext_resource path="res://entities/Cruiser/Cruiser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/player/PlayerController.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/bot/Bot.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/bot/AI_Controller.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ProceduralSky" id=1]
 radiance_size = 3
@@ -42,7 +43,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00692081, -0.0114179, -0.005
 [node name="Effects" type="Spatial" parent="World"]
 
 [node name="Camera" type="Spatial" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 7.42961e-13, 0, 9.3231e-13, 1, 9.09495e-13, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 2 )
 
@@ -58,6 +58,7 @@ far = 500.0
 margin_right = 1024.0
 margin_bottom = 600.0
 stretch = true
+script = ExtResource( 3 )
 
 [node name="Viewport" type="Viewport" parent="Camera/ViewportContainer"]
 size = Vector2( 1024, 600 )
@@ -66,49 +67,61 @@ handle_input_locally = false
 hdr = false
 render_target_update_mode = 3
 
+[node name="Terminal" type="Label" parent="Camera/ViewportContainer/Viewport"]
+margin_right = 1028.0
+margin_bottom = 600.0
+theme = ExtResource( 4 )
+text = "TEST
+ 
+TEST 
+
+TEST"
+valign = 2
+
 [node name="HUD" type="Camera" parent="Camera/ViewportContainer/Viewport"]
 transform = Transform( 1, 6.02569e-05, -5.5371e-05, -6.02574e-05, 1, -8.74859e-06, 5.53705e-05, 8.75193e-06, 1, 0, 0, 0 )
 cull_mask = 32
 current = true
 near = 0.1
 far = 5000.0
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
-transform = Transform( -0.622474, -0.00375027, -0.782631, -0.00594794, 0.999982, -6.10348e-05, 0.782618, 0.00461706, -0.622485, 106.622, 0.00412017, 80.9238 )
+[node name="Player" parent="." instance=ExtResource( 6 )]
+transform = Transform( -0.100368, -7.50102e-05, -0.99495, -5.75976e-05, 1, -6.95835e-05, 0.99495, 5.03269e-05, -0.100368, 66.6073, 0.00401355, -0.00368812 )
+mass = 200.0
+health = 1000
 
-[node name="Controller" parent="Player" instance=ExtResource( 5 )]
-
-[node name="mod" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.892546, 0.449298, 0.0386417, -0.449138, 0.893365, -0.0132286, -0.0404647, -0.00554836, 0.999166, 79.9043, 0.404026, -24.0738 )
+[node name="Controller" parent="Player" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.356474, 0.934305, 0, -0.934305, 0.356474, 0, 6.40039, 28.0821 )
 
-[node name="Spatial" parent="." instance=ExtResource( 7 )]
-transform = Transform( 0.923948, 0.38196, 0.0206348, -0.382517, 0.922602, 0.0498701, 1.0729e-05, -0.0539706, 0.998543, 89.8855, 2.34789, -24.2565 )
-
 [node name="_Effects" type="Node" parent="."]
 
 [node name="_Entities" type="Node" parent="."]
+editor/display_folded = true
 
-[node name="Bot" parent="_Entities" instance=ExtResource( 4 )]
+[node name="Bot" parent="_Entities" instance=ExtResource( 8 )]
+editor/display_folded = true
 transform = Transform( 1, 6.02574e-05, -5.53705e-05, -6.02574e-05, 1, -8.75193e-06, 5.53705e-05, 8.75193e-06, 1, 0, 0, 0 )
 
-[node name="Spatial" parent="_Entities/Bot" instance=ExtResource( 8 )]
+[node name="Spatial" parent="_Entities/Bot" instance=ExtResource( 9 )]
 
-[node name="Bot2" parent="_Entities" instance=ExtResource( 4 )]
-transform = Transform( -0.857305, -0.514808, 5.19763e-05, 0.0718279, -0.119514, 0.990231, -0.509773, 0.848934, 0.139438, 0, 0, 0 )
+[node name="Bot2" parent="_Entities" instance=ExtResource( 8 )]
+editor/display_folded = true
+transform = Transform( -0.857305, -0.514808, 5.19763e-05, 0.0718279, -0.119514, 0.990231, -0.509773, 0.848934, 0.139438, 0, 0, -27.8631 )
 
-[node name="Spatial" parent="_Entities/Bot2" instance=ExtResource( 8 )]
+[node name="Spatial" parent="_Entities/Bot2" instance=ExtResource( 9 )]
 
-[node name="Bot3" parent="_Entities" instance=ExtResource( 4 )]
+[node name="Bot3" parent="_Entities" instance=ExtResource( 8 )]
+editor/display_folded = true
 transform = Transform( 0.660578, 3.3237e-05, -0.750758, -6.02574e-05, 1, -8.75193e-06, 0.750758, 5.10182e-05, 0.660578, 0, 0, 19.8642 )
 
-[node name="Spatial" parent="_Entities/Bot3" instance=ExtResource( 8 )]
+[node name="Spatial" parent="_Entities/Bot3" instance=ExtResource( 9 )]
 
-[node name="Bot4" parent="_Entities" instance=ExtResource( 4 )]
+[node name="Bot4" parent="_Entities" instance=ExtResource( 8 )]
+editor/display_folded = true
 transform = Transform( 1, 6.02574e-05, -5.53705e-05, -6.02574e-05, 1, -8.75193e-06, 5.53705e-05, 8.75193e-06, 1, 21.4286, 0, 0 )
 
-[node name="Spatial" parent="_Entities/Bot4" instance=ExtResource( 8 )]
+[node name="Spatial" parent="_Entities/Bot4" instance=ExtResource( 9 )]

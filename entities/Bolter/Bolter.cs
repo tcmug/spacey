@@ -7,7 +7,7 @@ public class Bolter : Attachment
 	private PackedScene bullet;
 	private Node effects;
 	private float counter = 0;
-	private float delay = 0.3f;
+	private float delay = 0.5f;
 
 	public override void _Ready()
 	{

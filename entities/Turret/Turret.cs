@@ -40,6 +40,12 @@ public class Turret : Spatial
 			}
 
 			targetInSight = Math.Abs(up) < 0.01 && Math.Abs(right) < 0.01;
+			if (targetInSight) {
+				barrelX.GetNode<Bolter>("Bolter").Target(target as RigidBody);
+				barrelX.GetNode<Bolter>("Bolter").Engage();
+			} else {
+				barrelX.GetNode<Bolter>("Bolter").Target(target as RigidBody);
+			}
 			/*
 			if (fireTimer > 0) {
 				fireTimer -= delta;

@@ -18,7 +18,7 @@ public class PlayerController : Spatial
 
 	public override void _Input(InputEvent ev)
 	{
-	if (ev is InputEventMouseMotion)
+	if (ev is InputEventMouseMotion && !Input.IsActionPressed("move_camera"))
 		{
 			var mouseEvent = (InputEventMouseMotion)ev;
 			torque = torque + new Vector3(
@@ -43,15 +43,12 @@ public class PlayerController : Spatial
 
 		if (parent != null) {
 
-			Bot entity = (Bot)parent;
+			PhysicalEntity entity = (PhysicalEntity)parent;
 
 			Vector3 force = new Vector3(0,0,0);
 
 			if (Input.IsActionPressed("fire"))
 				entity.Shoot();
-
-			if (Input.IsActionJustPressed("fire_alt"))
-				entity.ShootAlt();
 
 			if (Input.IsActionPressed("move_forward"))
 			{
@@ -96,7 +93,9 @@ public class PlayerController : Spatial
 		Area a = area as Area;
 		if (a != null) {
 			a.GetNode<Spatial>("Rectangle").Visible = true;
-			(GetParent() as Bot).LockOn((a.GetParent() as AI_Controller).GetEntity());
+			var tar = a.GetParent() as AI_Controller;
+			if (tar != null)
+				(GetParent() as PhysicalEntity).LockOn(tar.GetEntity());
 			GD.Print(a.GetName());
 		}
 	}
