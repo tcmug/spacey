@@ -14,7 +14,7 @@ public class Camera : Godot.Spatial
 		if (following != null) {
 			this.Translate((following.Translation - this.Translation) + (following.GlobalTransform.basis.z * 10));
 		}
-		Mode = CameraMode.Orbit;
+		Mode = CameraMode.Chase;
 	}
 	
 	public override void _Input(InputEvent ev)

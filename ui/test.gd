@@ -30,7 +30,7 @@ var delay = 0;
 func _process(delta):
 	var rich = get_node("Viewport/Terminal");
 	
-	if (text[at] == '\n' and delay < 1.0):
+	if (text[at] == '\n' and delay < 0.5):
 		delay += delta;
 	else:
 		delay = 0;

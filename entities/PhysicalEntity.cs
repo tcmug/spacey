@@ -4,6 +4,9 @@ using System;
 public class PhysicalEntity: RigidBody
 {
 
+	public enum Faction { None, Civilian, Police }
+	
+	private Faction faction = Faction.None;
 	private float acceleration = 4000.0f;
 	private float accelerationDampening = 50.0f;
 	private float angularAcceleration = 5000.0f;
