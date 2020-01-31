@@ -1,4 +1,4 @@
-extends ViewportContainer
+extends Viewport
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -20,16 +20,12 @@ None
 .
 """;
 
-
-func _ready():
-	var rich = get_node("Viewport/Terminal");
-	
 var at = 0.0;
 var delay = 0;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var rich = get_node("Viewport/Terminal");
-	
+	var rich = get_node("Terminal");
+
 	if (text[at] == '\n' and delay < 0.5):
 		delay += delta;
 	else:
@@ -38,4 +34,3 @@ func _process(delta):
 		at += 0.5;
 		if (at >= text.length()):
 		  at = 0;
-	

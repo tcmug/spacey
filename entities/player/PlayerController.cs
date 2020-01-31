@@ -85,6 +85,7 @@ public class PlayerController : Spatial
 			torque = new Vector3();
 			entity.turn(ret);
 		}
+
 	}
 
 	
@@ -92,11 +93,10 @@ public class PlayerController : Spatial
 	{
 		Area a = area as Area;
 		if (a != null) {
-			a.GetNode<Spatial>("Rectangle").Visible = true;
+			a.Visible = true;
 			var tar = a.GetParent() as AI_Controller;
 			if (tar != null)
 				(GetParent() as PhysicalEntity).LockOn(tar.GetEntity());
-			GD.Print(a.GetName());
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class PlayerController : Spatial
 	{
 		Area a = area as Area;
 		if (a != null) {
-			a.GetNode<Spatial>("Rectangle").Visible = false;
+			a.Visible = false;
 		}
 	}
 

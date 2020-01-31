@@ -125,6 +125,13 @@ public class PhysicalEntity: RigidBody
 		}
 	}
 	
+	public Spatial GetLockedOnTarget() {
+		if (IsInstanceValid(lockedOn)) {
+			return lockedOn;
+		}
+		return null;
+	}
+	
 	public void Damage(int dmg)
 	{
 		this.health -= dmg;

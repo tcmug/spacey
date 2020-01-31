@@ -67,6 +67,8 @@
     <Compile Include="entities\Turret\Turret.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test\PlayerLabel.cs" />
+    <Compile Include="test\TargettingRectangle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
