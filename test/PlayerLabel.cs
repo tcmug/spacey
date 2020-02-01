@@ -15,6 +15,7 @@ public class PlayerLabel : Node2D
 		if (target != null) {
 			Vector3 point = target.GetGlobalTransform().origin;
 			Godot.Camera cam = GetTree().GetRoot().GetCamera();
+			if (cam == null) return;
 			float distance = player.GetGlobalTransform().origin.DistanceTo(point);
 			if (distance >= 1000) {
 				distance /= 1000;

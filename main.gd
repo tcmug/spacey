@@ -17,5 +17,10 @@ func _process(delta):
 		get_tree().reload_current_scene()
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 	    OS.window_fullscreen = !OS.window_fullscreen
+	if Input.is_action_just_pressed("toggle_mouse"):
+		if (Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED):
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# $BT_Sequence.tick(self);
 

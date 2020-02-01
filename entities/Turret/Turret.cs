@@ -1,13 +1,18 @@
 using Godot;
 using System;
 
-public class Turret : Spatial
+public class Turret : Attachment
 {
 	private Spatial barrelX, barrelY, emitPoint, muzzle;
 	private Spatial target = null;
 	private bool targetInSight = true;
 	private float projectileSpeed = 200.0f;
 	private float maxTurnSpeed = 0.01f;
+	
+	public override void Target(RigidBody trg)
+	{
+		target = trg;
+	}
 	
 	public override void _Ready() {
 		barrelY = GetNode<Spatial>("BarrelY");
@@ -62,15 +67,6 @@ public class Turret : Spatial
 			*/
 		}
 	}
-
-	private void _on_Area_body_entered(object body)
-	{
-	 	if (body is Bot) {
-			target = body as Spatial;
-			GD.Print("Turret targeting");
-		}
-	}
-
 }
 
 

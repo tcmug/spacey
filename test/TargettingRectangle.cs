@@ -10,7 +10,6 @@ public class TargettingRectangle : Area
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-		  GetNode<Label>("Node2D/Info").SetText("INFO");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,7 +18,11 @@ public class TargettingRectangle : Area
 		if (Visible) {
 			GetNode<Node2D>("Node2D").Visible = true;
 			Godot.Camera cam = GetTree().GetRoot().GetCamera();
-			GetNode<Node2D>("Node2D").SetPosition(cam.UnprojectPosition(GetGlobalTransform().origin));
+			if (cam != null) {
+				var target = GetParent().GetParent<PhysicalEntity>();
+				GetNode<Label>("Node2D/Info").SetText(target.GetTargettingInfoText());
+				GetNode<Node2D>("Node2D").SetPosition(cam.UnprojectPosition(GetGlobalTransform().origin));
+			}
 		} else {
 			GetNode<Node2D>("Node2D").Visible = false;
 		}

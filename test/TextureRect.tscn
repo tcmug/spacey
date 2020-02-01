@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://test/ui.tres" type="Material" id=1]
+[ext_resource path="res://test/TextureRect.gd" type="Script" id=2]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Camera/VP")
+
+[node name="TextureRect" type="TextureRect"]
+material = ExtResource( 1 )
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = SubResource( 1 )
+stretch_mode = 1
+script = ExtResource( 2 )

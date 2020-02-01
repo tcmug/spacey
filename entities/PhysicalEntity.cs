@@ -112,6 +112,14 @@ public class PhysicalEntity: RigidBody
 			wpn.Engage();
 	}
 	
+	public void Engage() {
+		for (var at = 0; at < armament.GetChildCount(); at++) {
+			Attachment wpn = armament.GetChild<Attachment>(at);
+			wpn.Engage();
+		}
+
+	}	
+	
 	public void LockOn(Spatial target) {
 		if (target is RigidBody) {
 			lockedOn = target as RigidBody;
@@ -121,7 +129,11 @@ public class PhysicalEntity: RigidBody
 				wpn.Target(lockedOn);
 			}
 		} else {
-			
+			for (var at = 0; at < armament.GetChildCount(); at++)
+			{
+				Attachment wpn = armament.GetChild<Attachment>(at);
+				wpn.Target(null);
+			}
 		}
 	}
 	
@@ -146,6 +158,13 @@ public class PhysicalEntity: RigidBody
 		}
 	}
 	
+	public void Select() {
+		GD.Print(GetTargettingInfoText());
+	}
+	
+	public string GetTargettingInfoText() {
+		return GetName() + "\nCREW: " + crew + "\nINTEGRITY: " + health; 
+	}
 
 }
 

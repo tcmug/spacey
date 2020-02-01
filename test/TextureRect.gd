@@ -14,4 +14,3 @@ func _ready():
 func window_resize():
 	var current_size = OS.get_window_size()
 	set_size(current_size)
-	print(current_size);

@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/bot/Bot.cs" type="Script" id=1]
 [ext_resource path="res://entities/Bolter/Bolter.tscn" type="PackedScene" id=2]
-[ext_resource path="res://entities/MissileLauncher/MissileLauncher.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 0, 1, 1.5, 0, 1, -1.5, 0, 1, 1.5, 0, 1, -1.5, -1, -1, 1.5, 1, -1, -1.5, 1, -1, 1.5, -1, -1, -1.5, 0, 1, 1.5, 0, 1, -1.5, 0, 1, -1.5, 0, 1, 1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5, -1, -1, 1.5, -1, -1, 1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5 )
@@ -49,6 +48,3 @@ shape = SubResource( 6 )
 [node name="_Armament" type="Spatial" parent="."]
 
 [node name="Bolter" parent="_Armament" instance=ExtResource( 2 )]
-
-[node name="MissileLauncher" parent="_Armament" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.43579, 0 )

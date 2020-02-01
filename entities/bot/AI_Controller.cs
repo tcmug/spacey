@@ -91,8 +91,7 @@ public class AI_Controller : Spatial
 					AIState = State.Evading;
 				}
 				if (AngleTowards(target.Translation) > 0.999f) {
-					bot.Shoot();
-					bot.ShootAlt();
+					bot.Engage();
 				}
 			}
 			break;

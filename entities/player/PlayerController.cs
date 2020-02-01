@@ -8,6 +8,7 @@ public class PlayerController : Spatial
 	private float mouseSensitivity = 0.2f;
 	private RayCast aimingRay;
 	private Spatial aimingSight;
+	private PhysicalEntity target;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,16 +17,33 @@ public class PlayerController : Spatial
 		aimingSight = GetNode<Spatial>("AimingSight");
 	}
 
+
+	public PhysicalEntity get_object_under_mouse() {
+		var mouse_pos = GetViewport().GetMousePosition();
+		var camera = GetViewport().GetCamera();
+		var ray_from = camera.ProjectRayOrigin(mouse_pos);
+		var ray_to = ray_from + camera.ProjectRayNormal(mouse_pos) * 1000.0f;
+		var space_state = GetWorld().DirectSpaceState;
+		var selection = space_state.IntersectRay(ray_from, ray_to);
+		
+		try {
+			return (selection["collider"] as PhysicalEntity);
+		} catch {}
+		return null;
+	}
+	
 	public override void _Input(InputEvent ev)
 	{
-	if (ev is InputEventMouseMotion && !Input.IsActionPressed("move_camera"))
-		{
-			var mouseEvent = (InputEventMouseMotion)ev;
-			torque = torque + new Vector3(
-				mouseEvent.Relative.y * -mouseSensitivity,
-				mouseEvent.Relative.x * -mouseSensitivity,
-				0
-			);
+		if (Input.GetMouseMode() == Input.MouseMode.Captured) {
+			if (ev is InputEventMouseMotion)
+				{
+				var mouseEvent = (InputEventMouseMotion)ev;
+				torque = torque + new Vector3(
+					mouseEvent.Relative.y * -mouseSensitivity,
+					mouseEvent.Relative.x * -mouseSensitivity,
+					0
+				);
+			}
 		}
 	}
 
@@ -47,8 +65,25 @@ public class PlayerController : Spatial
 
 			Vector3 force = new Vector3(0,0,0);
 
-			if (Input.IsActionPressed("fire"))
+			if (Input.IsActionJustPressed("fire")) {
+				var ent = get_object_under_mouse();
+				if (ent != null) {
+					ent.Select();
+					target = ent;
+					(GetParent() as PhysicalEntity).LockOn(ent);
+				} else {
+					(GetParent() as PhysicalEntity).LockOn(null);
+					target = null;
+				}
+			}
+	
+			if (target != null) {
+				entity.Engage();
+			}
+			
+			if (Input.IsActionPressed("fire")) {
 				entity.Shoot();
+			}
 
 			if (Input.IsActionPressed("move_forward"))
 			{

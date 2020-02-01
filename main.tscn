@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://Camera.cs" type="Script" id=2]
-[ext_resource path="res://test/TextureRect.gd" type="Script" id=3]
+[ext_resource path="res://test/TextureRect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/test.gd" type="Script" id=4]
 [ext_resource path="res://test/reticule.tscn" type="PackedScene" id=5]
 [ext_resource path="res://themes/main.tres" type="Theme" id=6]
@@ -11,17 +11,8 @@
 [ext_resource path="res://entities/bot/Bot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/bot/AI_Controller.tscn" type="PackedScene" id=10]
 
-[sub_resource type="ProceduralSky" id=4]
-radiance_size = 3
-sky_top_color = Color( 0.0823529, 0.0196078, 0.0588235, 1 )
-sky_horizon_color = Color( 0.137255, 0.0392157, 0.0941176, 1 )
-ground_bottom_color = Color( 0.0470588, 0.0666667, 0.0862745, 1 )
-ground_horizon_color = Color( 0.211765, 0.0156863, 0.207843, 1 )
-ground_curve = 0.0168179
-
-[sub_resource type="Environment" id=5]
-background_mode = 2
-background_sky = SubResource( 4 )
+[sub_resource type="Environment" id=2]
+background_mode = 1
 ambient_light_energy = 0.0
 glow_enabled = true
 glow_levels/2 = true
@@ -30,34 +21,7 @@ glow_levels/5 = false
 glow_levels/7 = true
 glow_blend_mode = 0
 
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-uniform vec4 color : hint_color;
-uniform float frequency = 300;
-uniform float depth = 0.0005;
-
-void fragment()
-{
-	//COLOR = color; 
-	vec2 uv = UV;
-	float freq = max(frequency, sin(uv.x + TIME) * 500.0);
-	float dep = max(depth, cos(uv.y + TIME) * 0.01);
-
-	uv.x += sin(uv.y * freq + TIME) * dep;
-	uv.x = clamp(uv.x, 0.0, 1.0);
-	COLOR.rgba = texture(TEXTURE, uv);
-
-}"
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 3 )
-shader_param/color = null
-shader_param/frequency = 300.0
-shader_param/depth = 0.0005
-
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("Camera/VP")
 
 [node name="Spatial" type="Spatial"]
@@ -65,8 +29,7 @@ transform = Transform( 1, 6.02574e-05, -5.53705e-05, -6.02574e-05, 1, -8.75193e-
 script = ExtResource( 1 )
 
 [node name="World" type="WorldEnvironment" parent="."]
-editor/display_folded = true
-environment = SubResource( 5 )
+environment = SubResource( 2 )
 
 [node name="Bullets" type="Spatial" parent="World"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00692081, -0.0114179, -0.00531507 )
@@ -84,16 +47,12 @@ current = true
 near = 0.1
 far = 500.0
 
-[node name="TextureRect" type="TextureRect" parent="Camera"]
-material = SubResource( 6 )
-margin_right = 1024.0
-margin_bottom = 600.0
-texture = SubResource( 7 )
-stretch_mode = 1
-script = ExtResource( 3 )
+[node name="TextureRect" parent="Camera" instance=ExtResource( 3 )]
+visible = false
+texture = SubResource( 3 )
 
 [node name="VP" type="Viewport" parent="Camera"]
-size = Vector2( 800, 600 )
+size = Vector2( 1024, 600 )
 transparent_bg = true
 hdr = false
 usage = 0
@@ -109,18 +68,13 @@ script = ExtResource( 4 )
 margin_right = 65.0
 margin_bottom = 189.0
 theme = ExtResource( 6 )
+custom_colors/font_color = Color( 0.368627, 1, 0.2, 1 )
 text = "TEST
  
 TEST 
 
 TEST"
 valign = 2
-
-[node name="ColorRect" type="ColorRect" parent="Camera/VP"]
-margin_left = 500.0
-margin_top = 500.0
-margin_right = 512.0
-margin_bottom = 512.0
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
 transform = Transform( -0.100368, -7.50102e-05, -0.99495, -5.75976e-05, 1, -6.95835e-05, 0.99495, 5.03269e-05, -0.100368, 66.6073, 0.00401355, -0.00368812 )

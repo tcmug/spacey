@@ -29,8 +29,7 @@ public class MissileLauncher : Attachment
 	}
 	
 	public override void Target(RigidBody trgt)
-	{
-		GD.Print("target ", trgt.GetName());
+	{	
 		target = trgt;
 	}
 	
@@ -45,6 +44,7 @@ public class MissileLauncher : Attachment
 			var obj = missile.Instance() as Missile;
 			obj.Init(tf.origin, x * 10, tf.basis.GetEuler(), target, owner.LinearVelocity - y * 2);
 			effects.AddChild(obj);
+			GD.Print("launched");
 			//((AudioStreamPlayer3D)GetNode("Shiit")).Play();
 		}
 	}

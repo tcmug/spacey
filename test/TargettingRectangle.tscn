@@ -19,17 +19,16 @@ shape = SubResource( 1 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Info" type="Label" parent="Node2D"]
-visible = false
-margin_left = -86.006
-margin_right = 95.994
-margin_bottom = 33.0
+margin_left = -113.165
+margin_top = 27.7063
+margin_right = 65.8354
+margin_bottom = 112.706
+rect_scale = Vector2( 1.25, 1.25 )
 theme = ExtResource( 2 )
-text = "I'LL BE DARNED"
+text = "..."
 align = 1
-valign = 1
 
 [node name="Sprite" type="Sprite" parent="Node2D"]
-visible = false
 position = Vector2( 0.735107, -30.874 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
