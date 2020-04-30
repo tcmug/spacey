@@ -4,22 +4,24 @@ using System;
 public class AI_Controller : Spatial
 {
 	
-	Bot bot;
+	PhysicalEntity bot;
 	RayCast frontSensor;
 	public enum State { Idle, Attacking, Evading, Avoiding }
 	
 	public State AIState;
 	public Vector3 avoidTarget;
 	public Spatial target;
+	private Spatial sensors;
 	private AudioStreamPlayer3D destroy;
 	private AudioStreamPlayer3D detect;
 	
 	public override void _Ready()
 	{       
-		bot = (Bot)GetParent();
+		bot = (PhysicalEntity)GetParent();
 		frontSensor = (RayCast)GetNode("Sensors/Front");
 		this.destroy = (AudioStreamPlayer3D)GetNode("SfxDestroy");
 		this.detect = (AudioStreamPlayer3D)GetNode("SfxDetect");
+		this.sensors = (Spatial)GetNode("Sensors");
 		AudioStreamPlayer3D engine = (AudioStreamPlayer3D)GetNode("Engine");
 		engine.Play();
 	}
@@ -49,14 +51,13 @@ public class AI_Controller : Spatial
 		return bot.Translation.DistanceTo(target);
 	}	
 	
-	public override void _Process(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
 		if (!IsInstanceValid(target)) {
 			AIState = State.Idle;
 			target = null;
 		}
 		
-		Spatial sensors = (Spatial)GetNode("Sensors");
 		if (sensors != null) {
 			for (int at = 0; at < sensors.GetChildCount(); at++) 
 			{

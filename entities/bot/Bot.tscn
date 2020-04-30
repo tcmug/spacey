@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/bot/Bot.cs" type="Script" id=1]
 [ext_resource path="res://entities/Bolter/Bolter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/HUD/Selected.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 0, 1, 1.5, 0, 1, -1.5, 0, 1, 1.5, 0, 1, -1.5, -1, -1, 1.5, 1, -1, -1.5, 1, -1, 1.5, -1, -1, -1.5, 0, 1, 1.5, 0, 1, -1.5, 0, 1, -1.5, 0, 1, 1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5, -1, -1, 1.5, -1, -1, 1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5 )
@@ -28,7 +29,6 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-editor/display_folded = true
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -38,7 +38,6 @@ mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
 
 [node name="Area" type="Area" parent="."]
-editor/display_folded = true
 collision_layer = 1024
 collision_mask = 1024
 
@@ -48,3 +47,5 @@ shape = SubResource( 6 )
 [node name="_Armament" type="Spatial" parent="."]
 
 [node name="Bolter" parent="_Armament" instance=ExtResource( 2 )]
+
+[node name="_Selected" parent="." instance=ExtResource( 3 )]

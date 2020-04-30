@@ -73,6 +73,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -
 amount = 25
 lifetime = 2.0
 visibility_aabb = AABB( -25, -25, -25, 50, 50, 50 )
+local_coords = false
 process_material = SubResource( 8 )
 draw_pass_1 = ExtResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_Missile_body_entered"]

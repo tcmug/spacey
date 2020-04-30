@@ -22,7 +22,7 @@ public class PlayerController : Spatial
 		var mouse_pos = GetViewport().GetMousePosition();
 		var camera = GetViewport().GetCamera();
 		var ray_from = camera.ProjectRayOrigin(mouse_pos);
-		var ray_to = ray_from + camera.ProjectRayNormal(mouse_pos) * 1000.0f;
+		var ray_to = ray_from + camera.ProjectRayNormal(mouse_pos) * 10000.0f;
 		var space_state = GetWorld().DirectSpaceState;
 		var selection = space_state.IntersectRay(ray_from, ray_to);
 		
@@ -47,7 +47,7 @@ public class PlayerController : Spatial
 		}
 	}
 
-	public override void _Process(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
 		Node parent = GetParent();
 		
@@ -67,12 +67,18 @@ public class PlayerController : Spatial
 
 			if (Input.IsActionJustPressed("fire")) {
 				var ent = get_object_under_mouse();
-				if (ent != null) {
-					ent.Select();
+				if (IsInstanceValid(ent)) {
+					if (IsInstanceValid(target)) {
+						target.Deselect();
+					}
 					target = ent;
+					target.Select();
 					(GetParent() as PhysicalEntity).LockOn(ent);
 				} else {
 					(GetParent() as PhysicalEntity).LockOn(null);
+					if (IsInstanceValid(target)) {
+						target.Deselect();
+					}					
 					target = null;
 				}
 			}
@@ -82,7 +88,7 @@ public class PlayerController : Spatial
 			}
 			
 			if (Input.IsActionPressed("fire")) {
-				entity.Shoot();
+				entity.Engage();
 			}
 
 			if (Input.IsActionPressed("move_forward"))

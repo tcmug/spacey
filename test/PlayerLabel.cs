@@ -38,6 +38,6 @@ public class PlayerLabel : Node2D
 				this.Visible = false;
 			}
 		}
-    }
+	}
 
 }

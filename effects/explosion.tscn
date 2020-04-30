@@ -35,7 +35,6 @@ draw_pass_1 = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Particles2" type="Particles" parent="."]
-emitting = false
 amount = 50
 lifetime = 3.0
 one_shot = true

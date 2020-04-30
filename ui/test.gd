@@ -12,7 +12,7 @@ var text = """VT232 FONT TEST
 2.
 3.
 	Tab
-    Space
+	Space
 None
 .
 .

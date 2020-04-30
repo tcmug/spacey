@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://test/TextureRect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://test/ui.tres" type="Material" id=2]
+[ext_resource path="res://test/TextureRect.gd" type="Script" id=3]
+[ext_resource path="res://ui/test.gd" type="Script" id=4]
+[ext_resource path="res://test/reticule.tscn" type="PackedScene" id=5]
+[ext_resource path="res://test/PlayerLabel.cs" type="Script" id=6]
+[ext_resource path="res://themes/main.tres" type="Theme" id=7]
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Camera/VP")
+
+[node name="Sprite3D" type="Sprite3D"]
+
+[node name="TextureRect" type="TextureRect" parent="." instance=ExtResource( 1 )]
+material = ExtResource( 2 )
+margin_left = -1468.09
+margin_top = -187.061
+margin_right = -444.093
+margin_bottom = 412.939
+texture = SubResource( 2 )
+stretch_mode = 1
+script = ExtResource( 3 )
+
+[node name="VP" type="Viewport" parent="."]
+size = Vector2( 1024, 600 )
+transparent_bg = true
+hdr = false
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+script = ExtResource( 4 )
+
+[node name="Z" type="Node2D" parent="VP" instance=ExtResource( 5 )]
+script = ExtResource( 6 )
+
+[node name="Terminal" type="Label" parent="VP"]
+margin_right = 65.0
+margin_bottom = 189.0
+theme = ExtResource( 7 )
+custom_colors/font_color = Color( 0.368627, 1, 0.2, 1 )
+text = "TEST
+ 
+TEST 
+
+TEST"
+valign = 2

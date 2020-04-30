@@ -29,9 +29,9 @@ public class Camera : Godot.Spatial
 		}
 	}	
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Process(float delta)
-    {
+	// Called when the node enters the scene tree for the first time.
+	public override void _Process(float delta)
+	{
 		Spatial following = GetParent().GetNode<Spatial>("Player");
 		Vector3 up = new Vector3(0, 1, 0);
 		Vector3 camPos = GetGlobalTransform().origin;
@@ -48,7 +48,7 @@ public class Camera : Godot.Spatial
 				Vector3 offset_target = target + (following.Transform.basis.z * -20)
 					+ (following.Transform.basis.x * 0.0f) 
 					+ (following.Transform.basis.y * 5.0f);
-				Translation += (offset_target - camPos) * delta * 10;
+				Translation += (offset_target - camPos) * delta * 2;
 				LookAt(target - (following.GlobalTransform.basis.z * -10), following.Transform.basis.y);
 			}
 			break;
@@ -63,6 +63,6 @@ public class Camera : Godot.Spatial
 			}
 			break;
 		}
-    }
+	}
 
 }

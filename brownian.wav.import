@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/brownian.wav-88767727d8cd744ba3e69cda6fd56707.sample"
+
+[deps]
+
+source_file="res://brownian.wav"
+dest_files=[ "res://.import/brownian.wav-88767727d8cd744ba3e69cda6fd56707.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

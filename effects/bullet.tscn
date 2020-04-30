@@ -1,29 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://effects/bullet.cs" type="Script" id=1]
-[ext_resource path="res://textures/fire.material" type="Material" id=2]
-[ext_resource path="res://whiss.wav" type="AudioStream" id=3]
+[ext_resource path="res://whiss.wav" type="AudioStream" id=2]
+[ext_resource path="res://textures/fire.png" type="Texture" id=3]
 
-[sub_resource type="CapsuleMesh" id=1]
-radius = 0.2
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="CapsuleMesh" id=2]
+material = SubResource( 1 )
+radius = 0.1
 mid_height = 4.0
-radial_segments = 14
-rings = 3
 
 [node name="RayCast" type="RayCast"]
 enabled = true
 cast_to = Vector3( 0, 0, -1 )
 script = ExtResource( 1 )
 
-[node name="Mesh" type="MeshInstance" parent="."]
-cast_shadow = 0
-mesh = SubResource( 1 )
-material/0 = ExtResource( 2 )
-
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 2 )
 attenuation_model = 2
 unit_db = 20.0
 autoplay = true
 out_of_range_mode = 1
 doppler_tracking = 2
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null

@@ -32,7 +32,7 @@ public class Bolter : Attachment
 		var obj = bullet.Instance() as bullet;
 		obj.Init(tf.origin, (tf.basis.z * 300) + owner.LinearVelocity, tf.basis.GetEuler());
 		effects.AddChild(obj);
-		((AudioStreamPlayer3D)GetNode("Shiit")).Play();
+		//((AudioStreamPlayer3D)GetNode("Shiit")).Play();
 	}
 	
 }

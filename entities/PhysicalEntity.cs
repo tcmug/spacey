@@ -43,7 +43,7 @@ public class PhysicalEntity: RigidBody
 			}
 		}
 	}
-	    
+		
 	private void ApplyTorque(float delta) 
 	{
 		var vtorque = Transform.basis.Xform(GetTorqueAction());
@@ -98,20 +98,6 @@ public class PhysicalEntity: RigidBody
 		force += xyz;
 	}
 	
-	public void Shoot() 
-	{
-		Attachment wpn = armament.GetChild<Attachment>(0);
-		if (wpn != null)
-			wpn.Engage();
-	}
-	
-	public void ShootAlt() 
-	{
-		Attachment wpn = armament.GetChild<Attachment>(1);
-		if (wpn != null)
-			wpn.Engage();
-	}
-	
 	public void Engage() {
 		for (var at = 0; at < armament.GetChildCount(); at++) {
 			Attachment wpn = armament.GetChild<Attachment>(at);
@@ -147,7 +133,6 @@ public class PhysicalEntity: RigidBody
 	public void Damage(int dmg)
 	{
 		this.health -= dmg;
-		GD.Print("Entity damaged for " + dmg + " points");
 		if (this.health <= 0) 
 		{
 			var obj = explosion.Instance() as explosion;
@@ -159,9 +144,17 @@ public class PhysicalEntity: RigidBody
 	}
 	
 	public void Select() {
-		GD.Print(GetTargettingInfoText());
+		var selector = GetNode<Node2D>("_Selected");
+		if (selector != null)
+			selector.Visible = true;
 	}
 	
+	public void Deselect() {
+		var selector = GetNode<Node2D>("_Selected");
+		if (selector != null)
+			selector.Visible = false;
+	}
+		
 	public string GetTargettingInfoText() {
 		return GetName() + "\nCREW: " + crew + "\nINTEGRITY: " + health; 
 	}

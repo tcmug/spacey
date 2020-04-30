@@ -59,5 +59,6 @@ collision_mask = 32768
 
 [node name="AimingRay2" type="CollisionShape" parent="AimingThing"]
 shape = SubResource( 5 )
+disabled = true
 [connection signal="area_entered" from="AimingThing" to="." method="_on_AimingThing_area_entered"]
 [connection signal="area_exited" from="AimingThing" to="." method="_on_AimingThing_area_exited"]
